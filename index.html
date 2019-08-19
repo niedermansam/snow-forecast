@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html>
+    <head>
+
+      <!-- Global site tag (gtag.js) - Google Analytics -->
+      <script async src="https://www.googletagmanager.com/gtag/js?id=UA-122663887-2"></script>
+      <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'UA-122663887-2');
+      </script>
+
+        <title>Ski Resort Explorer</title>
+        <link rel="shortcut icon" type="image/png" href="average-icon.jpg"/>
+        <meta charset="utf-8" />
+        <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.3/leaflet.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet.markercluster/0.5.0/MarkerCluster.Default.css" />
+        <script src="http://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.3/leaflet.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet.markercluster/0.5.0/leaflet.markercluster.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/wnumb/1.1.0/wNumb.min.js"></script>
+        <script src="resorts.js"></script>
+        <meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/noUiSlider/8.5.1/nouislider.min.css" />
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/noUiSlider/8.5.1/nouislider.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/wnumb/1.1.0/wNumb.min.js"></script>
+        <link rel="stylesheet" href="styles.css" />
+        <link rel="stylesheet" href="breath.css" />
+        <link rel="stylesheet" href="tablet.css" />
+        <link rel="stylesheet" href="mobile.css" />  <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+    </head>
+<body>
+
+<div id='header'>
+  <h1>Ski Explorer</h1>
+  <a href="http://www.averageanalytics.com">
+    <image id="logo" src = "icon.png" href="http://www.averageanalytics.com"/>
+  </a>
+</div>
+
+
+<div id="options">
+
+
+<div class='slider-area' id='ticket-slider-area' style="margin-right: auto; margin-left: auto; width: 90%; margin-bottom: 10px; text-align: center;">
+<p class='label'>Ticket Price:</p>
+<div class ='slider' id="price-slider" style="top: 0px; right: 1px; margin: 10px 25px;"></div>
+<p><div class="dollar filter-display"><input class='min' type="number" min='1' max='155' id="ticket-min" readonly></div>
+
+<div class="dollar filter-display"><input class='max' type="number" min='2' max='155' id="ticket-max" readonly></div>
+</p>
+</div>
+
+<div class='slider-area' id='vert-slider-area'  style="margin-right: auto; margin-left: auto; width: 90%; margin-bottom: 10px; text-align: center;">
+<p class='label'>Vertical Feet:</p>
+<div  class ='slider' id="vert-slider" style="top: 0px; right: 1px; margin: 10px 25px;"></div>
+<div class="filter-display"><input class="max" type="number" min='1' max='155' id="vert-min" readonly></div>
+<div class="filter-display"><input class="min" type="number" min='2' max='155' id="vert-max" readonly></div>
+</div>
+
+<div id='snow-forecast'>
+<h3 style="text-align: center; align-self: flex-start;">Click the map for a forecast and more information!</h3>
+</div>
+
+<p id='contact'>
+  Created by Sam Supplee-Niederman
+  <br/>
+  sam@averageanalytics.com
+</p>
+
+</div>
+
+
+<div id="map"></div>
+
+<div class="graphs">
+
+  <div id="scatter"><!-- Plotly chart will be drawn inside this DIV --></div>
+  <div id="histogram"><!-- Plotly chart will be drawn inside this DIV --></div>
+
+</div>
+
+
+<div id= "forecast"></div>
+
+
+<script src="map.js" type="text/javascript"></script>
+<script src="ticket-slider.js" type="text/javascript"></script>
+<script src="vert-slider.js" type="text/javascript"></script>
+<script src="forecast.js" type="text/javascript"></script>
+<script src="scatter.js" charset="utf-8"></script>
+
+<script>
+window.smoothScroll = function(target) {
+    var scrollContainer = target;
+    do { //find scroll container
+        scrollContainer = scrollContainer.parentNode;
+        if (!scrollContainer) return;
+        scrollContainer.scrollTop += 1;
+    } while (scrollContainer.scrollTop == 0);
+
+    var targetY = 0;
+    do { //find the top of target relatively to the container
+        if (target == scrollContainer) break;
+        targetY += target.offsetTop;
+    } while (target = target.offsetParent);
+
+    scroll = function(c, a, b, i) {
+        i++; if (i > 30) return;
+        c.scrollTop = a + (b - a) / 30 * i;
+        setTimeout(function(){ scroll(c, a, b, i); }, 20);
+    }
+    // start scrolling
+    scroll(scrollContainer, scrollContainer.scrollTop, targetY, 0);
+}
+</script>
+</body>
+
+
+</html>
