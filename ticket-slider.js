@@ -37,7 +37,8 @@ resortsFeatureGroup.clearLayers();
     onEachFeature: resortPopups,
         filter:
             function(feature, layer) {
-                 return (feature.properties.ticket <= rangeMax) && (feature.properties.ticket >= rangeMin) && (feature.properties.vertical <= vertMax) && (feature.properties.vertical >= vertMin);
+                 return (feature.properties.ticket <= rangeMax) &&
+                 (feature.properties.ticket >= rangeMin);
             },
     pointToLayer: resortsLayer
 })

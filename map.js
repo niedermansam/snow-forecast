@@ -7,7 +7,6 @@ map = L.map('map', {
 
 
 navigator.geolocation.getCurrentPosition((position) => {
-  console.log(position)
  if(position) {
   map.setView(new L.LatLng(position.coords.latitude,position.coords.longitude),6);
 }
