@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import "./App.min.css";
-import { Map, Marker, Popup, Tooltip, MapLayer } from "react-leaflet"
+import { Map, Marker, Popup, Tooltip, GeoJSON } from "react-leaflet"
 import Resorts from "./components/assets/Resorts"
 import MapLayers from "./components/MapLayers"
 import RangeSlider from "./components/RangeSlider"
@@ -47,7 +47,9 @@ class App extends Component {
 
   componentDidMount(){
     let data = Resorts()
+    console.log(data)
     this.setState({
+      json: data,
       data: data.features,
       vertLimits: this.vertLimits,
       priceLimits: this.priceLimits
@@ -92,12 +94,45 @@ class App extends Component {
     })
 
     // Set state with new data
-    this.setState({data: newData})
+
+    //let newJson = this.state.json;
+
+    //newJson.features = newData;
+
+    //this.setState({json: newJson})
   }
 
   getMarkers(){
-    let markerArray = [];
+    let markers;
 
+    let filter = (feature, layer) => {
+      let [minVert, maxVert] = this.state.vertLimits
+      let [minPrice, maxPrice] = this.state.priceLimits
+
+      // Handle vertical ft. filter
+      if(feature.properties.vertical < minVert ||
+        feature.properties.vertical > maxVert ) return false
+
+      // Handle ticket price filter
+      else if(feature.properties.ticket < minPrice ||
+        feature.properties.ticket > maxPrice ) return false
+
+      // Return object if it passes all tests
+      else return true
+
+
+        
+    }
+
+    //console.log(this.state.json)
+
+    function onEachFeature(feature, layer){
+      if (feature.properties && feature.properties.name) {
+          layer.bindPopup(feature.properties.name);
+      }
+    }
+
+    /*
     if(this.state.data){
     for(let resort of this.state.data){
 
@@ -106,8 +141,20 @@ class App extends Component {
         markerArray.push(newMarker);
       }
     }
+    */
 
-    return markerArray
+    console.log(this.state)
+
+    if(this.state.json){
+      markers = <GeoJSON 
+                   key={`geojson-${Math.round(Math.random(), 3)*1000}`}
+                   data = {this.state.json}
+                   filter = {filter}
+                   onEachFeature = {onEachFeature}
+                   />
+    }
+
+    return markers
   }
 
   render() {
