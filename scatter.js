@@ -24,7 +24,7 @@ return inBounds;
 let drawScatterPlot = function(){
   let data = getInBound();
 
-  var trace1 = {
+  let trace1 = {
     y: [],
     x: [],
     z: [],
@@ -49,7 +49,7 @@ let drawScatterPlot = function(){
 
   data = [trace1];
 
-  var layout = {
+  let layout = {
     title: 'Scatter Plot with a Color Dimension',
     hovermode: 'closest',
     showLegend: true
@@ -72,7 +72,7 @@ let drawHistogram = function(){
     trace.x.push(resort.properties.ticket)
   })
 
-  var layout = {
+  let layout = {
     title: 'Scatter Plot with a Color Dimension',
     showLegend: true
   };

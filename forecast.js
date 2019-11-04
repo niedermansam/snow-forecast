@@ -11,7 +11,7 @@ fetch(url)
               let lat = data.geometry.geometries[0].coordinates[1]
               let lon = data.geometry.geometries[0].coordinates[0]
 
-              var clickSpot = [lat,lon]
+              let clickSpot = [lat,lon]
               clickMarker = new L.marker(clickSpot).bindPopup("Forecast Location");
               map.addLayer(clickMarker);
 

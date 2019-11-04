@@ -12,7 +12,7 @@ let vertTip = {
           }
         }
 
-var vert_slider = document.getElementById('vert-slider');
+let vert_slider = document.getElementById('vert-slider');
 noUiSlider.create(vert_slider, {
     connect: true,
     step: 100,
