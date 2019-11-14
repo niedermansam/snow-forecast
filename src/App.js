@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import "./App.min.css";
-import { Map, Marker, Popup, Tooltip, GeoJSON } from "react-leaflet"
+import { Map, Marker, Popup, Tooltip, GeoJSON, FeatureGroup } from "react-leaflet"
 import Resorts from "./components/assets/Resorts"
 import MapLayers from "./components/MapLayers"
 import RangeSlider from "./components/RangeSlider"
@@ -47,7 +47,7 @@ class App extends Component {
 
   componentDidMount(){
     let data = Resorts()
-    console.log(data)
+    //console.log(data)
     this.setState({
       json: data,
       data: data.features,
@@ -143,15 +143,15 @@ class App extends Component {
     }
     */
 
-    console.log(this.state)
+    //console.log(this.state)
 
     if(this.state.json){
-      markers = <GeoJSON 
+      markers = <FeatureGroup><GeoJSON 
                    key={`geojson-${Math.round(Math.random(), 3)*1000}`}
                    data = {this.state.json}
                    filter = {filter}
                    onEachFeature = {onEachFeature}
-                   />
+      /></FeatureGroup>
     }
 
     return markers

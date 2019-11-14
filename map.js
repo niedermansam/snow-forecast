@@ -1,3 +1,5 @@
+import * as L from 'leaflet';
+import Resorts from './src/components/assets/Resorts'
 var forecastBox;
 var map;
 
@@ -62,6 +64,7 @@ basemap_0.addTo(map);
 
 // Create Popups
 function resortPopups(feature, layer) {
+    let price, lifts, acres, vert;
     if(feature.properties.ticket){
       price="Adult Ticket: $" + feature.properties.ticket;
     }
@@ -90,7 +93,7 @@ function resortsLayer(feature, latlng) {
         fillOpacity: 0.8
     })
 }
-var createMarkers  = new L.geoJson(resorts,{
+var createMarkers  = new L.geoJson(Resorts,{
     onEachFeature: resortPopups,
     pointToLayer: resortsLayer,
     popupAnchor: [0,0]
@@ -105,4 +108,4 @@ var weatherMaps = {"Cloud Coverage": clouds,
                    "Wind Overlay": wind,
                    "Precipitation": precip};
 
-controler = L.control.layers(basemaps,weatherMaps,{collapsed:true}).addTo(map);
+let controler = L.control.layers(basemaps,weatherMaps,{collapsed:true}).addTo(map);
